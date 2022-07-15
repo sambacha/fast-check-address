@@ -1,0 +1,60 @@
+{
+  "name": "ts-module-mock",
+  "version": "0.1.4",
+  "description": "typescript cjs and esm module library mockup",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./*": {
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.cjs"
+    }
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "baseline": "npx tsc --extendedDiagnostics",
+    "explain": "npx tsc --explainFiles > explanation.txt",
+    "trace": "npx tsc --traceResolution > resolution.txt",
+    "profile": "node --trace-ic ./node_modules/typescript/lib/tsc.js --generateCpuProfile profile.cpuprofile -p tsconfig.json",
+    "tracer": "mkdir -p tmp_folder/ && npx tsc -p ./tsconfig.json --generateTrace tmp_folder",
+    "test": "echo \"Fail: no test specified\" && exit 127",
+    "compile": "npx rollup -c rollup.config.js",
+    "fmt": "npx prettier --config .prettierrc.js --write src/**/*.ts"
+  },
+  "keywords": [
+    "typescript modules",
+    "esm modules",
+    "commonjs modules",
+    "isomorphic modules"
+  ],
+  "author": "Sam Bacha",
+  "license": "APACHE-2.0",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.2",
+    "@types/jest": "^27",
+    "@types/node": "^16",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "@typescript/analyze-trace": "^0.9.0",
+    "downlevel-dts": "^0.10.0",
+    "esbuild": "^0.14.39",
+    "eslint": "^8.17.0",
+    "jest": "^27",
+    "prettier": "^2.6.2",
+    "process-tracing": "^1.0.2",
+    "rollup": "^2.75.6",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^4.9.1",
+    "ts-jest": "^27",
+    "ts-node": "^10.7.0",
+    "tslib": "^2.4.0",
+    "typescript": "4.7.3",
+    "typescript-eslint-language-service": "^5.0.0"
+  }
+}
